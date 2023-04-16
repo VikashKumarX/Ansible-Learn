@@ -2,7 +2,6 @@
 Ansible is Configuration Management Tool.
 Configuration management tools make changes and deployments faster, remove the potential for human error, while making system management predictable and scalable. They also help you to keep track of the state of your resources, and keep you from repeating tasks, like installing the same package twice.
 # Configuration Management Tool r of 2 type i.e. Pull-Based & Push-Based
-In this type of configuration management tool, the nodes pull the configuration information from the server (hence, the name).
 # PULL BASED CONFIGURATION TOOL
 A small software (called agent or client) is installed on every node. This agent/client will at regular intervals, get the configuration from the server
 compare the configuration received from the server with the current configuration of the node if there is any mis-match, take the steps required to match the configuration of the node with the configuration received from the server.This means that, its always the agent/client that initiates communication, not the main server.
