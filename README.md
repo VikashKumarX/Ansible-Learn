@@ -2,8 +2,8 @@
 Ansible is Configuration Management Tool.
 Configuration management tools make changes and deployments faster, remove the potential for human error, while making system management predictable and scalable. They also help you to keep track of the state of your resources, and keep you from repeating tasks, like installing the same package twice.
 # Advantages of Ansible:
-Free: Ansible is an open-source tool.
-Simple set up: No special coding skills are necessary to use Ansible’s playbooks (more on playbooks later).
+ 1 . Free: Ansible is an open-source tool.
+ 2 . Simple set up: No special coding skills are necessary to use Ansible’s playbooks (more on playbooks later).
 Powerful: Ansible lets you model even highly complex IT workflows.
 Flexible: You can orchestrate the entire application environment no matter where it’s deployed. You can also customize it based on your needs.
 Agentless: You don’t need to install any other software or firewall ports on the client systems you want to automate. You also don’t have to set up a separate management structure.
