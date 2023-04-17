@@ -1,0 +1,17 @@
+---
+- name :"Install and copy file apache httpd on both nodes"
+hosts : demoserver
+become : yes
+vars : 
+project_root : /var/www/html
+tasks:
+- name: "Install Apache Webserver"
+ apt: pkg=httpd state =latest
+- name: "Place the index file at project root"
+ copy: src=index.html dest={{ project_root }}/index.html owner=apache group=apache mode=0644
+- name: "Enable Apache on node "
+ service: name=httpd enabled=yes 
+ notify: restart apache
+ handlers:
+ - name: "Restart apache "
+  service: name=httpd state=restarted

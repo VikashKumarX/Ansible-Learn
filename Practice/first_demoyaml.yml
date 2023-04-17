@@ -1,0 +1,21 @@
+---
+- hosts: demoserver
+become: yes
+become_method: sudo
+task:
+- name : "Update cache & full system update"
+apt:
+update_cache: true
+upgrade: dist
+cache_valid_time: 3600
+force_apt_get: true
+---
+- name : "Create user in both node" 
+hosts : demoserver
+become: yes
+task:
+- name : " Mentioning User in List form "
+user: name ='{{ item }}' 
+with_items: 
+- Shiva
+- Devon
