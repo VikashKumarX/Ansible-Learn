@@ -1,0 +1,15 @@
+- name : Deploy packages
+hosts:all
+vars:
+web_pkg:httpd
+firewall_pckg: firewalld
+web_service:httpd
+firewall_service : firewalld
+firewall_rule: http
+tasks:
+-name :package installation
+yum:
+name:
+-"{{web_pckg}}"
+-"{{firewall_pckg}}"
+state: latest
