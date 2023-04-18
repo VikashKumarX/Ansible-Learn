@@ -1,0 +1,12 @@
+---
+-name : create user with secret file
+hosts:  all
+become: true
+vars_files:
+- filename
+tasks:
+-name: create user with ansible vault
+user:
+name:"{{ username}}"
+password: "{{passwd}}"
+...
