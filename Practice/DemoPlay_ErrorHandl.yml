@@ -1,0 +1,116 @@
+---
+- name: Install basic package
+  hosts: localhost
+  tasks:
+     - name: install autofs
+       yum:
+         name: autos
+         state: present
+       ignore_errors: true
+
+     - name: install httpd
+       yum:
+         name: httpd
+         state: present
+---
+- name: restarting httpd using handlers
+  hosts: localhost
+  force_handlers: yes
+  tasks:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+---
+- name: Web page fetcher
+  hosts: localhost
+  tasks:
+    - name: connect to website
+      uri:
+        url: https://demoweb.com
+        return_content: true
+      register: output
+
+    - name: verify content
+      debug:
+        msg: "verifying content"
+      failed_when:
+        - '"this content" not in output.content'
+        - '"other content" not in output.content
+---
+- name: Web page fetcher
+  hosts: localhost
+  tasks:
+    - name: connect to website
+      uri:
+        url: https://demowed.com
+        return_content: true
+      register: output
+
+    - name: verify content
+      fail:
+        msg: "verifying content"
+      when:
+        - '"this content" not in output.content'
+        - '"other content" not in output.content'
+---
+- name: Web page fetcher
+  hosts: hqdev1.tekneed.com
+  tasks:
+    - name: connect to website
+      uri:
+        url: https://tekneed.com
+        return_content: true
+      register: output
+
+    - name: verify content
+      fail:
+        msg: "verifying content"
+      changed_when: "'success' in output.stdout"
+---
+- name: setting up httpd
+  hosts: localhost
+  tasks:
+    - name: Install start and enable httpd
+      block:
+      - name: install httpd
+        yum:
+          name: httpd
+          state: present
+      - name: start and enable httpd
+        service:
+          name: httpd
+          state: started
+          enabled: true
+      when: ansible_distribution == "Red Hat"
+---
+- name: setting up httpd
+  hosts: localhost
+  tasks:
+    - name: Install the latest httpd and restart
+      block:
+        - name: install httpd
+          yum:
+            name: htt
+            state: latest
+      rescue:
+        - name: restart httpd
+          service:
+            name: httpd
+            state: started
+        - name: Install autofs
+          yum:
+            name: autofs
+      always:
+        - name: restart autofs
+          service:
+            name: autofs
+            state: started
+...            
