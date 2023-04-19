@@ -1,0 +1,38 @@
+---
+- name: Install httpd package
+  hosts: all
+  vars:
+    supported_distros:
+      - CentOS
+      - Fedora
+  tasks:
+     - name: install httpd
+       yum:
+         name: httpd
+         state: present
+       when: ansible_distribution in supported_distros
+---
+- name: Install httpd package
+  hosts: all
+  tasks:
+     - name: install httpd
+       yum:
+         name: httpd
+         state: present
+       when: >
+          ( ansible_distribution == "CentOS"
+            and ansible_distribution_major_version == "8" )
+          or
+          ( ansible_distribution == "Fedora"
+            and ansible_distribution_major_version == "28" )
+---
+- name: Install nmap
+  hosts: localhost
+  tasks:
+     - name: install nmap
+       yum:
+         name: nmap
+         state: present
+       loop: "{{ ansible_mounts }}"
+       when: item.mount == "/" and item.size_available > 500000000
+...       
