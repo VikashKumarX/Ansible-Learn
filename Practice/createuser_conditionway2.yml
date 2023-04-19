@@ -1,0 +1,13 @@
+---
+- name: Add users to groups
+  hosts: hqdev1.tekneed.com
+  tasks:
+    - name: add users to their groups
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+      with_items:
+        - { name: 'kehinde', groups: 'wheel' }
+        - { name: 'alex', groups: 'finance' }
+        - { name: 'oyin', groups: 'finance' }
+...        
