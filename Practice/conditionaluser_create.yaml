@@ -1,0 +1,30 @@
+---
+- name: create new users
+  hosts: localhost
+  vars:
+     newusers:
+       - kehinde
+       - alex
+       - oyin
+  tasks:
+     - name: create new users
+       user:
+         name: "{{ item }}"
+         state: present
+       loop: "{{ newusers }}"
+---
+ name: Add users to groups
+  hosts: localhost
+  tasks:
+    - name: add users to their groups
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+      loop:
+        - name: kehinde
+          groups: wheel
+        - name: alex
+          groups: finance
+        - name: oyin
+          groups: finance
+...
