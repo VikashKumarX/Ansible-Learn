@@ -1,0 +1,22 @@
+{
+  "domain":{
+ 	"name": "mydomain",
+ 	"prod_mode": "testing",
+	"user": "sampleuser2",
+	"password": "sam2pleusj" ,
+	"admin": {
+	   "servername": "Adpythmpostgresredis",
+	   "listenport": "6789"
+         },
+   "machines": [
+	{
+	  "refername": "Machine1",
+	  "name": "MWIINODE1"
+ 	},
+  	{
+	  "refername": "Machine2",
+	  "name": "MWIINODE2"
+ 	}
+    ]
+  }
+}	

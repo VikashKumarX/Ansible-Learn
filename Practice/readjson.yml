@@ -1,0 +1,32 @@
+# Read Json File 
+---
+- name: Read Json
+  hosts: localhost
+  tasks:
+ - name: Display the content of the json
+   shell: cat filename.json
+   register: result
+ - name: Save json data to a variable as a fact
+   set_fact: 
+    jsondata : "{{result.stdout | from_json}}"
+ - name: SetDomainName
+   set_fact: 
+    domain_name : "{{jsondata | json_query(jmesquery)}}"	
+   vars:
+    jmesquery: 'domain.name'
+ - name: SetEnviornmentName
+   set_fact: 
+    domainenv_name : "{{jsondata | json_query(jmesquery)}}"	
+   vars:
+    jmesquery: 'domain.prod_mode'
+   set_fact: 
+    domain_username : "{{jsondata | json_query(jmesquery)}}"	
+   vars:
+    jmesquery: 'domain.user'
+ - name: setadmin_ListenPort
+   set_fact: 
+    admin_Listenport : "{{jsondata | json_query(jmesquery)}}"	
+   vars:
+    jmesquery: 'domain.admin.listenport'
+ - name: Debug the valuesa
+   debug: msg=" Admin ListenPort =>{{admin_ListenPort}}, Domain Environment =>{{domainenv_name}}, DomainName =>{{domain_name}}, DomainUserName => {{domain_username}} "
