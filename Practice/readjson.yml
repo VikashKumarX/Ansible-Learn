@@ -4,7 +4,7 @@
   hosts: localhost
   tasks:
  - name: Display the content of the json
-   shell: cat filename.json
+   shell: cat sampleconfig.json
    register: result
  - name: Save json data to a variable as a fact
    set_fact: 
