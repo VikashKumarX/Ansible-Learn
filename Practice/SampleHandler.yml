@@ -1,0 +1,8 @@
+---
+- name: Check the below tasks exceuted or not
+  become : yes
+  hosts : localhost
+  tasks:
+    - name : free up memory
+      shell:
+...       
